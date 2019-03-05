@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Test from "./Test";
-import Login from "./Login";
+import Test from "./component/Test";
+import Login from "./component/Login";
 
 class App extends Component {
   render() {

@@ -23,9 +23,6 @@ let readFileSync = fs.readFileSync;
 
 const router = express.Router();
 
-// define ssr path pattern, exclude file and hmr requests
-// const ssrRegex = /^\/(?!static|favicon\.ico|.*hot-update\.js).*/;
-
 function handler(request, response, next) {
   const template = readFileSync("build/index.html")
     .toString()
@@ -56,7 +53,7 @@ function handler(request, response, next) {
   });
 }
 
-// do server-side rendering
+// do server-side rendering and add url
 router.get("/", handler);
 router.get("/login", handler);
 
@@ -92,6 +89,8 @@ export const devServerHandler = compiler => {
 
   // ignore in-memory file requests, will be handled by the webpack dev middleware
   const devServerRouter = express.Router();
+
+  // add your path url
   devServerRouter.get("/", router);
   devServerRouter.get("/login", router);
   return devServerRouter;
