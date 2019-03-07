@@ -3,18 +3,37 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import "./App.css";
+import "assets/scss/material-kit-react.scss?v=1.4.0";
+import JssProvider from "react-jss/lib/JssProvider";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  createGenerateClassName
+} from "@material-ui/core/styles";
+import green from "@material-ui/core/colors/green";
+import red from "@material-ui/core/colors/red";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
-// Use clientEnv to access environment variables from the server.
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+    accent: red,
+    type: "light"
+  }
+});
 
-// Get the server URL from the base tag if you need it.
-// const baseHref = document.getElementsByTagName("base")[0].href;
+// Create a new class name generator.
+const generateClassName = createGenerateClassName();
 
 ReactDOM.hydrate(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <JssProvider generateClassName={generateClassName}>
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </JssProvider>,
   document.getElementById("root")
 );
 

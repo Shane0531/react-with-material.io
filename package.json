@@ -3,11 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "3.0.2",
     "babel-loader": "8.0.4",
+    "classnames": "2.2.6",
+    "history": "4.7.2",
+    "moment": "2.24.0",
+    "node-sass": "4.11.0",
+    "nouislider": "13.1.0",
+    "prop-types": "15.7.1",
     "react": "^16.8.3",
+    "react-datetime": "2.16.3",
     "react-dom": "^16.8.3",
+    "react-jss": "^8.6.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts-with-ssr": "0.6.0"
+    "react-scripts-with-ssr": "0.6.0",
+    "react-slick": "0.23.2",
+    "react-swipeable-views": "0.13.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "7.3.0",
+    "@babel/preset-env": "7.3.1",
+    "@babel/preset-react": "7.0.0",
+    "webpack": "4.19.1"
+  },
+  "optionalDependencies": {
+    "eslint": "5.6.0",
+    "eslint-config-prettier": "4.0.0",
+    "eslint-plugin-prettier": "3.0.1",
+    "prettier": "1.16.4"
   },
   "scripts": {
     "start": "react-scripts-with-ssr start",

@@ -17,6 +17,15 @@ import * as fs from "fs";
 import * as path from "path";
 import App from "./App";
 import { StaticRouter } from "react-router-dom";
+import { SheetsRegistry } from "jss";
+import JssProvider from "react-jss/lib/JssProvider";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  createGenerateClassName
+} from "@material-ui/core/styles";
+import green from "@material-ui/core/colors/green";
+import red from "@material-ui/core/colors/red";
 
 // provide a way to emulate fs access in development mode when builds are served from in-memory
 let readFileSync = fs.readFileSync;
@@ -24,9 +33,27 @@ let readFileSync = fs.readFileSync;
 const router = express.Router();
 
 function handler(request, response, next) {
+  const sheetsRegistry = new SheetsRegistry();
+
+  // Create a sheetsManager instance.
+  const sheetsManager = new Map();
+
+  // Create a theme instance.
+  const theme = createMuiTheme({
+    palette: {
+      primary: green,
+      accent: red,
+      type: "light"
+    }
+  });
+
+  // Create a new class name generator.
+  const generateClassName = createGenerateClassName();
+
   const template = readFileSync("build/index.html")
     .toString()
     .replace(/%BASE_HREF%/g, process.env.BASE_HREF || "")
+    .replace(/%CSS%/g, sheetsRegistry.toString())
     .replace(
       /%CLIENT_ENV%/g,
       JSON.stringify({
@@ -37,9 +64,16 @@ function handler(request, response, next) {
   const context = {};
   const [head, tail] = template.split("%ROOT%");
   const stream = renderToNodeStream(
-    <StaticRouter location={{ pathname: request.url }} context={context}>
-      <App />
-    </StaticRouter>
+    <JssProvider
+      registry={sheetsRegistry}
+      generateClassName={generateClassName}
+    >
+      <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
+        <StaticRouter location={{ pathname: request.url }} context={context}>
+          <App />
+        </StaticRouter>
+      </MuiThemeProvider>
+    </JssProvider>
   );
   response.type("html");
   response.write(head);

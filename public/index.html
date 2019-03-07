@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <!--
+  <head>
+    <!--
       %BASE_HREF% is a placeholder, that is supposed to be replaced by the
       server-side renderer. %BASE_HREF% is determined during runtime and can be
       changed without recompiling making your compiled web app independent of
@@ -12,24 +11,32 @@
       references are kept relative. Alternatively, you can delete the base tag
       and use %PUBLIC_URL% as documented by create-react-app.
     -->
-  <base href="%BASE_HREF%/" />
-  <meta charset="utf-8" />
-  <link rel="shortcut icon" href="favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="theme-color" content="#000000" />
-  <!--
+    <base href="%BASE_HREF%/" />
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="manifest.json" />
-  <script>clientEnv=%CLIENT_ENV%</script>
-  <title>React App</title>
-</head>
+    <link rel="manifest" href="manifest.json" />
+    <style id="jss-server-side">
+      %CSS%
+    </style>
+    <script>
+      clientEnv=%CLIENT_ENV%
+    </script>
+    <title>React App</title>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root">%ROOT%</div>
-  <!--
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">%ROOT%</div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,6 +46,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

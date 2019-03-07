@@ -1,15 +1,29 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Test from "./component/Test";
-import Login from "./component/Login";
+import MainPage from "./views/main/MainPage";
+import Login from "./views/Login";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    if (typeof window === "undefined") {
+      global.window = {};
+    }
+  }
+
+  componentDidMount() {
+    const jssStyles = document.getElementById("jss-server-side");
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
+
   render() {
     return (
-      <div className="App">
+      <div>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/" component={Test} />
+          <Route path="/" component={MainPage} />
         </Switch>
       </div>
     );
